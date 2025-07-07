@@ -2,6 +2,8 @@
 
 Easily create professional resumes with a modern and customizable interface.
 
+Try it out at [https://baptiste-mnh.github.io/curry-culum/](https://baptiste-mnh.github.io/curry-culum/)
+
 ## Main Features
 
 - Interactive editing of all CV sections (personal info, experience, education, skills, languages, projects, interests, certifications...)
@@ -29,7 +31,7 @@ Easily create professional resumes with a modern and customizable interface.
 
 Transform your current CV to this JSON format using chatGPT or any other AI tool!
 
-![JSON Template](./public/sample.json)
+![JSON Template](./src/assets/sample.json)
 
 ## Import/Export a CV
 
@@ -43,7 +45,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open [http://localhost:5173/curry-culum/](http://localhost:5173/curry-culum/) in your browser.
 
 ## Customization
 

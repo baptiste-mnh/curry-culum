@@ -13,6 +13,8 @@ import { exportCVDataToJSON } from "@/utils/cv";
 import { Download, Globe, RotateCcw } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
+import faviconImage from "/favicon.ico";
+import sampleJson from "@/assets/sample.json";
 
 const Toolbar: React.FC = () => {
   const { cvData, setTemplate, setLanguage, resetCV } = useCVDataContext();
@@ -59,12 +61,16 @@ const Toolbar: React.FC = () => {
   };
 
   const handleGetJSONTemplate = () => {
+    const jsonString = JSON.stringify(sampleJson, null, 2);
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = "/sample.json";
+    a.href = url;
     a.download = "curry-culum-template.json";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -81,7 +87,7 @@ const Toolbar: React.FC = () => {
               className="flex items-center space-x-2"
             >
               <img
-                src="/favicon.ico"
+                src={faviconImage}
                 alt="Curry Culum"
                 className="w-6 h-6 rounded-full"
               />
