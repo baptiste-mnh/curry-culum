@@ -10,7 +10,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useCVDataContext } from "@/hooks/useCVDataContext";
 import { exportCVDataToJSON } from "@/utils/cv";
-import { Download, Globe, Home, RotateCcw } from "lucide-react";
+import { Download, Globe, RotateCcw } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
 
@@ -58,6 +58,15 @@ const Toolbar: React.FC = () => {
     }
   };
 
+  const handleGetJSONTemplate = () => {
+    const a = document.createElement("a");
+    a.href = "/sample.json";
+    a.download = "curry-culum-template.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   return (
     <div className="bg-white border-b border-gray-200 px-4 py-3 print:hidden">
       <div className="flex items-center justify-between">
@@ -71,7 +80,11 @@ const Toolbar: React.FC = () => {
               variant="outline"
               className="flex items-center space-x-2"
             >
-              <Home className="h-4 w-4" />
+              <img
+                src="/favicon.ico"
+                alt="Curry Culum"
+                className="w-6 h-6 rounded-full"
+              />
               <span className="text-sm font-medium text-gray-700">Home</span>
             </Button>
             <span className="text-sm font-medium text-gray-700">Template:</span>
@@ -109,6 +122,14 @@ const Toolbar: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            onClick={handleGetJSONTemplate}
+            className="flex items-center space-x-2"
+          >
+            <Download className="h-4 w-4" />
+            <span>Get JSON Template</span>
+          </Button>
           {/* Export JSON */}
           <Button
             variant="outline"

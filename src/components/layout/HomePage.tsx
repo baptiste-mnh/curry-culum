@@ -54,10 +54,15 @@ const HomePage: React.FC<HomePageProps> = ({ onStartEditing }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-gray-200 flex items-center justify-center p-4">
       <div className="max-w-4xl w-full space-y-8">
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-gray-900">CV Builder</h1>
+        <div className="text-center space-y-4 flex flex-col items-center">
+          <img
+            src="/logo.png"
+            alt="Curry Culum"
+            className="w-42 h-42 rounded-full"
+          />
+          <h1 className="text-4xl font-bold text-gray-900">Curry Culum</h1>
           <p className="text-xl text-gray-600">
             Create professional resumes with ease
           </p>

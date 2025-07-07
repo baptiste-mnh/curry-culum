@@ -1,0 +1,179 @@
+{
+  "template": "simple",
+  "language": "en",
+  "theme": {
+    "primaryColor": "#1f2937",
+    "secondaryColor": "#6b7280",
+    "accentColor": "#3b82f6",
+    "fontFamily": "Helvetica",
+    "fontSize": {
+      "name": "24px",
+      "title": "16px",
+      "header": "14px",
+      "text": "12px",
+      "tags": "10px"
+    }
+  },
+  "personalInfo": {
+    "firstName": "Dwight",
+    "lastName": "Schrute",
+    "email": "dwight.schrute@dundermifflin.com",
+    "phone": "+1 570-555-1234",
+    "address": "Schrute Farms, Honesdale, PA",
+    "title": "Assistant to the Regional Manager",
+    "summary": "Dedicated and passionate beet farmer and paper salesman with a strong sense of duty and leadership.",
+    "photoUrl": null
+  },
+  "sections": [
+    {
+      "id": "exp1",
+      "type": "experiences",
+      "title": "Professional Experience",
+      "data": [
+        {
+          "id": "exp1-1",
+          "position": "Assistant to the Regional Manager",
+          "company": "Dunder Mifflin",
+          "startDate": "2001-06-01",
+          "endDate": "2023-01-01",
+          "isCurrent": true,
+          "description": "Managed sales team, organized office events, and ensured beet farm productivity.",
+          "technologies": ["Salesforce", "Excel", "Leadership"]
+        }
+      ],
+      "isAtPageStart": false,
+      "order": 1
+    },
+    {
+      "id": "edu1",
+      "type": "education",
+      "title": "Education",
+      "data": [
+        {
+          "id": "edu1-1",
+          "degree": "Bachelor of Agricultural Management",
+          "institution": "Scranton University",
+          "startDate": "1997-09-01",
+          "endDate": "2001-05-31",
+          "grade": "Magna Cum Laude",
+          "description": "Specialized in beet farming and business management."
+        }
+      ],
+      "isAtPageStart": false,
+      "order": 2
+    },
+    {
+      "id": "skills1",
+      "type": "skillCategories",
+      "title": "Technical Skills",
+      "data": [
+        {
+          "id": "cat1",
+          "name": "Sales",
+          "skills": ["Negotiation", "Cold Calling", "Client Management"]
+        },
+        {
+          "id": "cat2",
+          "name": "Farming",
+          "skills": ["Beet Cultivation", "Irrigation", "Organic Fertilizer"]
+        }
+      ],
+      "isAtPageStart": false,
+      "order": 3
+    },
+    {
+      "id": "soft1",
+      "type": "softSkills",
+      "title": "Soft Skills",
+      "data": ["Leadership", "Discipline", "Loyalty", "Attention to Detail"],
+      "isAtPageStart": false,
+      "order": 4
+    },
+    {
+      "id": "lang1",
+      "type": "languages",
+      "title": "Languages",
+      "data": [
+        { "id": "lang-en", "name": "English", "level": "Native" },
+        { "id": "lang-de", "name": "German", "level": "B2" }
+      ],
+      "isAtPageStart": false,
+      "order": 5
+    },
+    {
+      "id": "proj1",
+      "type": "projects",
+      "title": "Projects",
+      "data": [
+        {
+          "id": "proj1-1",
+          "title": "Schrute Farms Expansion",
+          "description": "Expanded the family beet farm to double its size and introduced agritourism.",
+          "technologies": ["Organic Farming", "Marketing"],
+          "url": "https://schrutefarms.com"
+        }
+      ],
+      "isAtPageStart": false,
+      "order": 6
+    },
+    {
+      "id": "int1",
+      "type": "interests",
+      "title": "Interests",
+      "data": [
+        {
+          "id": "int1-1",
+          "name": "Martial Arts",
+          "role": "Sensei",
+          "period": "2005-2023",
+          "description": "Runs a dojo and teaches self-defense to colleagues."
+        },
+        {
+          "id": "int1-2",
+          "name": "Beet Farming"
+        }
+      ],
+      "isAtPageStart": false,
+      "order": 7
+    },
+    {
+      "id": "cert1",
+      "type": "certifications",
+      "title": "Certifications",
+      "data": [
+        {
+          "id": "cert1-1",
+          "name": "Volunteer Sheriff Deputy",
+          "issuer": "Scranton Police Department",
+          "date": "2010-04-01",
+          "url": "https://scrantonpd.gov"
+        }
+      ],
+      "isAtPageStart": false,
+      "order": 8
+    }
+  ],
+  "sectionStartPage": {
+    "personalInfo": false,
+    "experiences": false,
+    "education": false,
+    "skillCategories": false,
+    "softSkills": false,
+    "languages": false,
+    "projects": false,
+    "interests": false,
+    "certifications": false
+  },
+  "sectionOrder": [
+    "personalInfo",
+    "experiences",
+    "education",
+    "skillCategories",
+    "softSkills",
+    "languages",
+    "projects",
+    "interests",
+    "certifications"
+  ],
+  "itemPageBreaks": {}
+}
