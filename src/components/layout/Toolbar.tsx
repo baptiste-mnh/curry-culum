@@ -66,7 +66,7 @@ const Toolbar: React.FC = () => {
           <div className="flex items-center space-x-2">
             <Button
               onClick={() => {
-                window.location.href = "/";
+                window.location.href = "/curry-culum/";
               }}
               variant="outline"
               className="flex items-center space-x-2"
