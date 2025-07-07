@@ -4,6 +4,7 @@ import { viteSingleFile } from "vite-plugin-singlefile";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  base: "/curry-culum/",
   plugins: [react(), viteSingleFile(), tailwindcss()],
   resolve: {
     alias: {

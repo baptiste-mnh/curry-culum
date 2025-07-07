@@ -25,7 +25,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
 
   // Helper function to safely get font sizes
   const getFontSize = (
-    type: keyof ThemeConfig["fontSize"],
+    type: keyof NonNullable<ThemeConfig["fontSize"]>,
     defaultSize: string
   ) => {
     const fontSize = theme?.fontSize?.[type];
