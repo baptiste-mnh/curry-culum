@@ -1,0 +1,198 @@
+/* Print protection styles */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-size: 12pt;
+    line-height: 1.6;
+    margin: 0 !important;
+  }
+
+  .print-controls {
+    display: none !important;
+  }
+
+  .no-page-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .no-text-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    orphans: 3 !important;
+    widows: 3 !important;
+  }
+
+  .section-container {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 2em !important;
+  }
+
+  .section-title {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    margin-bottom: 1em !important;
+  }
+
+  .bullet-point-container {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 1em !important;
+  }
+
+  .experience-item {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 2em !important;
+  }
+
+  .education-item {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 1em !important;
+  }
+
+  .project-item {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 1em !important;
+  }
+
+  .certification-item {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 1em !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  table {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  img {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  ul,
+  ol {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  li {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  #page-preview-wrapper,
+  #page-preview-wrapper-fullscreen {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Supprime le padding du conteneur d'aperçu */
+  .overflow-auto {
+    padding: 0 !important;
+  }
+
+  /* Supprime les marges auto générées par mx-auto */
+  .mx-auto {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* S'assurer que html + body utilisent toute la largeur */
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Gabarit principal */
+  #cv-template {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* Base styles for page break protection */
+.no-page-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.no-text-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  orphans: 3;
+  widows: 3;
+}
+
+.section-container {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  margin-bottom: 2em;
+}
+
+.section-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+.bullet-point-container {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.experience-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  margin-bottom: 2em;
+}
+
+.education-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  margin-bottom: 1em;
+}
+
+.project-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  margin-bottom: 1em;
+}
+
+.certification-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  margin-bottom: 1em;
+}
