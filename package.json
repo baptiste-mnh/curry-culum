@@ -1,7 +1,7 @@
 {
   "name": "cv-builder",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -47,6 +47,7 @@
     "@eslint/js": "^9.29.0",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/color": "^4.2.0",
+    "@types/node": "^24.0.10",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.2",

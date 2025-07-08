@@ -6,6 +6,7 @@ import {
   migrateCVData,
   exportCVDataToJSON,
   importCVDataFromJSON,
+  ImportResult,
 } from "@/utils/cv";
 import {
   saveToLocalStorage,
@@ -29,7 +30,7 @@ export interface UseCVDataReturn {
   updateSectionData: (sectionType: SectionType, data: unknown) => void;
   updateItemPageBreak: (itemId: string, hasPageBreak: boolean) => void;
   createNewCV: (template?: string) => void;
-  loadCVData: (jsonString: string) => void;
+  loadCVData: (jsonString: string) => ImportResult;
   exportCVData: () => string;
   resetCV: () => void;
   resetPageBreaks: () => void;
@@ -151,16 +152,14 @@ export const useCVData = (): UseCVDataReturn => {
     setError(null);
   }, []);
 
-  const loadCVData = useCallback((jsonString: string) => {
-    try {
-      const importedData = importCVDataFromJSON(jsonString);
-      setCVData(importedData);
+  const loadCVData = useCallback((jsonString: string): ImportResult => {
+    const result = importCVDataFromJSON(jsonString);
+
+    if (result.success && result.data) {
+      setCVData(result.data);
       setError(null);
-    } catch (err) {
-      console.error("Error loading CV data:", err);
-      setError(err instanceof Error ? err.message : "Failed to load CV data");
-      throw err;
     }
+    return result;
   }, []);
 
   const exportCVData = useCallback(() => {

@@ -40,11 +40,16 @@ const HomePage: React.FC<HomePageProps> = ({ onStartEditing }) => {
 
     try {
       const text = await selectedFile.text();
-      loadCVData(text);
-      onStartEditing();
-      toast.success("CV data imported successfully");
+      const result = loadCVData(text);
+
+      if (result.success) {
+        onStartEditing();
+        toast.success("CV data imported successfully");
+      } else {
+        toast.error(result.error || "Invalid JSON file or corrupted data");
+      }
     } catch (_e) {
-      toast.error("Invalid JSON file or corrupted data");
+      toast.error("Error reading the file");
       console.error(_e);
     }
   };
@@ -147,6 +152,9 @@ const HomePage: React.FC<HomePageProps> = ({ onStartEditing }) => {
             GitHub
           </a>
         </p>
+      </div>
+      <div className="text-center text-sm text-gray-500 mb-4">
+        Version v{import.meta.env.VITE_VERSION}
       </div>
     </div>
   );

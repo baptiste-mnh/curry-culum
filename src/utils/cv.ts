@@ -37,14 +37,11 @@ export const createEmptyCVData = (template: string = "base"): CVData => {
     createEmptySection(type)
   );
 
-  const sectionStartPage = DEFAULT_SECTION_ORDER.reduce(
-    (acc, type) => {
-      const config = SECTIONS_CONFIG.find((s) => s.id === type);
-      acc[type] = config?.defaultStartPage ?? false;
-      return acc;
-    },
-    {} as Record<SectionType, boolean>
-  );
+  const sectionStartPage = DEFAULT_SECTION_ORDER.reduce((acc, type) => {
+    const config = SECTIONS_CONFIG.find((s) => s.id === type);
+    acc[type] = config?.defaultStartPage ?? false;
+    return acc;
+  }, {} as Record<SectionType, boolean>);
 
   return {
     template,
@@ -129,17 +126,50 @@ export const exportCVDataToJSON = (data: CVData): string => {
   return JSON.stringify(data, null, 2);
 };
 
-export const importCVDataFromJSON = (jsonString: string): CVData => {
+export interface ImportResult {
+  success: boolean;
+  data?: CVData;
+  error?: string;
+}
+
+export const importCVDataFromJSON = (jsonString: string): ImportResult => {
   try {
+    // Check if the string is empty or just whitespace
+    if (!jsonString || jsonString.trim() === "") {
+      return {
+        success: false,
+        error: "The file is empty or contains no valid data",
+      };
+    }
+
     const parsedData = JSON.parse(jsonString);
 
     if (!validateCVData(parsedData)) {
-      throw new Error("Invalid CV data format");
+      return {
+        success: false,
+        error:
+          "The CV data format is not valid. Please check that the file contains compatible CV data.",
+      };
     }
 
-    return migrateCVData(parsedData);
+    const migratedData = migrateCVData(parsedData);
+    return {
+      success: true,
+      data: migratedData,
+    };
   } catch (error) {
     console.error("Error importing CV data:", error);
-    throw new Error("Failed to import CV data: Invalid JSON format");
+
+    if (error instanceof SyntaxError) {
+      return {
+        success: false,
+        error: "The JSON file is not valid. Please check the file syntax.",
+      };
+    }
+
+    return {
+      success: false,
+      error: "Error importing CV data. Please check the file.",
+    };
   }
 };
