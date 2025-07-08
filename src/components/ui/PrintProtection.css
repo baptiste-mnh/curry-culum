@@ -117,25 +117,25 @@
     box-shadow: none !important;
   }
 
-  /* Supprime le padding du conteneur d'aperçu */
+  /* Remove preview container padding */
   .overflow-auto {
     padding: 0 !important;
   }
 
-  /* Supprime les marges auto générées par mx-auto */
+  /* Remove auto-generated margins from mx-auto */
   .mx-auto {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
-  /* S'assurer que html + body utilisent toute la largeur */
+  /* Ensure html + body use full width */
   html,
   body {
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  /* Gabarit principal */
+  /* Main template */
   #cv-template {
     width: 100% !important;
     max-width: 100% !important;

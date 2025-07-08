@@ -417,9 +417,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
 
     return (
       <View style={styles.leftSection}>
-        <Text style={styles.leftSectionTitle}>
-          {language === "fr" ? "Profil" : "Profile"}
-        </Text>
+        <Text style={styles.leftSectionTitle}>Profile</Text>
         <Text style={styles.summary}>{safeRender(personalInfo.summary)}</Text>
       </View>
     );
@@ -544,11 +542,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
               </View>
               <Text style={styles.experienceDate}>
                 {safeRender(exp?.startDate)} -{" "}
-                {exp?.isCurrent
-                  ? language === "fr"
-                    ? "Présent"
-                    : "Present"
-                  : safeRender(exp?.endDate)}
+                {exp?.isCurrent ? "Present" : safeRender(exp?.endDate)}
               </Text>
             </View>
             {exp?.description && (
@@ -602,7 +596,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
             </Text>
             {edu?.grade && (
               <Text style={styles.educationGrade}>
-                {language === "fr" ? "Note" : "Grade"}: {safeRender(edu.grade)}
+                Grade: {safeRender(edu.grade)}
               </Text>
             )}
           </View>
@@ -652,8 +646,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
               <View>
                 {proj.url && (
                   <Text style={styles.projectLinks}>
-                    {language === "fr" ? "Projet" : "Project"}:{" "}
-                    {safeRender(proj.url)}
+                    Project: {safeRender(proj.url)}
                   </Text>
                 )}
                 {proj.github && (

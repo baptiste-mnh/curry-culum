@@ -62,7 +62,7 @@ export const PhotoUpload: React.FC<PhotoUploadProps> = ({
 
   return (
     <div className="space-y-4">
-      <Label>Photo de profil</Label>
+      <Label>Profile Photo</Label>
 
       <div
         className={`relative border-2 border-dashed rounded-lg p-4 text-center transition-colors ${
@@ -78,7 +78,7 @@ export const PhotoUpload: React.FC<PhotoUploadProps> = ({
           <div className="relative inline-block">
             <img
               src={photoUrl}
-              alt="Photo de profil"
+              alt="Profile Photo"
               className="w-32 h-32 object-cover rounded-lg"
               style={{ objectFit: "cover" }}
             />
@@ -98,7 +98,7 @@ export const PhotoUpload: React.FC<PhotoUploadProps> = ({
               <User className="w-8 h-8 text-gray-400" />
             </div>
             <div className="text-sm text-gray-600">
-              <p>Glissez-déposez une image ici ou</p>
+              <p>Drag and drop an image here or</p>
               <Button
                 type="button"
                 variant="outline"
@@ -107,7 +107,7 @@ export const PhotoUpload: React.FC<PhotoUploadProps> = ({
                 className="mt-2"
               >
                 <Upload className="w-4 h-4 mr-2" />
-                Choisir une image
+                Choose an image
               </Button>
             </div>
           </div>
@@ -124,7 +124,7 @@ export const PhotoUpload: React.FC<PhotoUploadProps> = ({
 
       {!photoUrl && (
         <p className="text-xs text-gray-500">
-          Formats acceptés: JPG, PNG, GIF. Taille recommandée: 200x200px
+          Accepted formats: JPG, PNG, GIF. Recommended size: 200x200px
         </p>
       )}
     </div>

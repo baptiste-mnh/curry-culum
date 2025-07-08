@@ -2,6 +2,15 @@ import HomePage from "@/components/layout/HomePage";
 import Sidebar from "@/components/layout/Sidebar";
 import Toolbar from "@/components/layout/Toolbar";
 import { getTemplateComponent } from "@/components/templates";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import {
   ResizableHandle,
@@ -12,11 +21,14 @@ import { Toaster } from "@/components/ui/sonner";
 import { CVDataProvider } from "@/contexts/CVDataContext";
 import { useCVDataContext } from "@/hooks/useCVDataContext";
 import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
+import { Button } from "./components/ui/button";
 import PDFPreview from "./components/ui/PDFPreview";
 
 function AppContent() {
   const { cvData, isLoading, error } = useCVDataContext();
   const [isEditing, setIsEditing] = useState(false);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   if (isLoading) {
     return (
@@ -49,35 +61,65 @@ function AppContent() {
 
   return (
     <>
-      <div className="h-screen w-screen flex flex-col">
+      <div className="h-screen w-screen flex flex-col overflow-hidden">
         {/* Toolbar */}
         <Toolbar />
+        {isMobile ? (
+          <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+            {/* <Sidebar /> */}
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <Sidebar />
+            </div>
+            {/* Preview Button */}
+            <Drawer direction="bottom">
+              <DrawerTrigger asChild>
+                <Button className="m-2" variant="outline">
+                  See Preview
+                </Button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <div className="mx-auto w-full h-full flex flex-col">
+                  <DrawerHeader>
+                    <DrawerTitle>CV Preview</DrawerTitle>
+                  </DrawerHeader>
+                  <div className="flex-1 min-h-0">
+                    <PDFPreview template={TemplateComponent} cvData={cvData} />
+                  </div>
+                  <DrawerFooter>
+                    <DrawerClose asChild>
+                      <Button variant="outline">Close</Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </div>
+              </DrawerContent>
+            </Drawer>
+          </div>
+        ) : (
+          <div className="flex-1 min-h-0 overflow-hidden">
+            <ResizablePanelGroup direction="horizontal" className="h-full">
+              <ResizablePanel
+                defaultSize={30}
+                minSize={25}
+                maxSize={50}
+                className="print:hidden"
+              >
+                <div className="h-full bg-amber-300 overflow-y-auto">
+                  <Sidebar />
+                </div>
+              </ResizablePanel>
 
-        {/* Main Content */}
-        <div className="flex-1 min-h-0">
-          <ResizablePanelGroup direction="horizontal" className="h-full">
-            <ResizablePanel
-              defaultSize={30}
-              minSize={25}
-              maxSize={50}
-              className="print:hidden"
-            >
-              <div className="h-full bg-amber-300 overflow-y-auto">
-                <Sidebar />
-              </div>
-            </ResizablePanel>
+              <ResizableHandle />
 
-            <ResizableHandle />
-
-            <ResizablePanel defaultSize={70} className="min-h-0">
-              <div className="h-full">
-                <PDFPreview template={TemplateComponent} cvData={cvData} />
-              </div>
-            </ResizablePanel>
-          </ResizablePanelGroup>
-        </div>
+              <ResizablePanel defaultSize={70} className="min-h-0">
+                <div className="h-full">
+                  <PDFPreview template={TemplateComponent} cvData={cvData} />
+                </div>
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          </div>
+        )}
       </div>
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 }

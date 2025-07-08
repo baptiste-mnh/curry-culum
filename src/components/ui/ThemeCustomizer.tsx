@@ -43,11 +43,11 @@ const ThemeCustomizer: React.FC = () => {
 
   // Ensure fontSize exists with default values
   const fontSize = cvData.theme.fontSize || {
-    name: "24px",
-    title: "16px",
-    header: "14px",
-    text: "12px",
-    tags: "10px",
+    name: "18px",
+    title: "14px",
+    header: "12px",
+    text: "10px",
+    tags: "8px",
   };
 
   // Helper function to extract numeric value from px string
@@ -196,7 +196,7 @@ const ThemeCustomizer: React.FC = () => {
           {/* Preset Colors */}
           <div className="space-y-2">
             <Label className="text-sm font-medium">Preset Themes</Label>
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-4 gap-2">
               {presetColors.map((preset) => (
                 <Button
                   key={preset.name}
@@ -226,7 +226,9 @@ const ThemeCustomizer: React.FC = () => {
                       style={{ backgroundColor: preset.accent }}
                     />
                   </div>
-                  <span className="text-xs">{preset.name}</span>
+                  <span className="text-xs break-words text-center whitespace-pre-line">
+                    {preset.name.replace(/ /g, "\n")}
+                  </span>
                 </Button>
               ))}
             </div>

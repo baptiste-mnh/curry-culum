@@ -382,11 +382,7 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
             </Text>
             <Text style={styles.experienceDate}>
               {safeRender(exp?.startDate)} -{" "}
-              {exp?.isCurrent
-                ? language === "fr"
-                  ? "Présent"
-                  : "Present"
-                : safeRender(exp?.endDate)}
+              {exp?.isCurrent ? "Present" : safeRender(exp?.endDate)}
             </Text>
             {exp?.description && (
               <Text style={styles.experienceDescription}>
@@ -397,9 +393,7 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
               Array.isArray(exp.technologies) &&
               exp.technologies.length > 0 && (
                 <Text style={styles.experienceTech}>
-                  <Text style={{ fontWeight: "bold" }}>
-                    {language === "fr" ? "Technologies" : "Technologies"}:
-                  </Text>{" "}
+                  <Text style={{ fontWeight: "bold" }}>Technologies:</Text>{" "}
                   {exp.technologies.map((tech) => safeRender(tech)).join(", ")}
                 </Text>
               )}
@@ -442,9 +436,7 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
             </Text>
             {edu?.grade && (
               <Text style={styles.educationGrade}>
-                <Text style={{ fontWeight: "bold" }}>
-                  {language === "fr" ? "Note" : "Grade"}:
-                </Text>{" "}
+                <Text style={{ fontWeight: "bold" }}>Grade:</Text>{" "}
                 {safeRender(edu.grade)}
               </Text>
             )}
@@ -555,9 +547,7 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
               Array.isArray(proj.technologies) &&
               proj.technologies.length > 0 && (
                 <Text style={styles.projectTech}>
-                  <Text style={{ fontWeight: "bold" }}>
-                    {language === "fr" ? "Technologies" : "Technologies"}:
-                  </Text>{" "}
+                  <Text style={{ fontWeight: "bold" }}>Technologies:</Text>{" "}
                   {proj.technologies.map((tech) => safeRender(tech)).join(", ")}
                 </Text>
               )}
@@ -565,8 +555,7 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
               <View>
                 {proj.url && (
                   <Text style={styles.projectLinks}>
-                    {language === "fr" ? "Projet" : "Project"}:{" "}
-                    {safeRender(proj.url)}
+                    Project: {safeRender(proj.url)}
                   </Text>
                 )}
                 {proj.github && (

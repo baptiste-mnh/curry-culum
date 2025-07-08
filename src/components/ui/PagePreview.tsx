@@ -64,7 +64,7 @@ const PagePreview: React.FC<PagePreviewProps> = ({ children }) => {
         {/* Fullscreen Header */}
         <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200 print:hidden">
           <h2 className="text-lg font-semibold text-gray-800">
-            Aperçu CV - Mode Plein Écran
+            CV Preview - Fullscreen Mode
           </h2>
           <Button
             variant="outline"
@@ -73,7 +73,7 @@ const PagePreview: React.FC<PagePreviewProps> = ({ children }) => {
             className="flex items-center space-x-2"
           >
             <X className="h-4 w-4" />
-            <span>Fermer (Échap)</span>
+            <span>Close (Esc)</span>
           </Button>
         </div>
 
@@ -129,7 +129,7 @@ const PagePreview: React.FC<PagePreviewProps> = ({ children }) => {
             className="flex items-center space-x-2"
           >
             <Maximize2 className="h-4 w-4" />
-            <span>Plein écran</span>
+            <span>Fullscreen</span>
           </Button>
           <Button variant="outline" size="sm" onClick={handleDownload}>
             <DownloadIcon className="h-4 w-4" />
