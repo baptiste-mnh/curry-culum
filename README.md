@@ -1,5 +1,9 @@
 # Curry Culum
 
+<div align="center">
+  <img src="public/logo.png" alt="Curry Culum" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;" />
+</div>
+
 Easily create professional resumes with a modern and customizable interface.
 
 Try it out at [https://baptiste-mnh.github.io/curry-culum/](https://baptiste-mnh.github.io/curry-culum/)
