@@ -80,11 +80,11 @@ const Toolbar: React.FC = () => {
 
   return (
     <div className="w-full border-b border-gray-200 px-4 py-3 print:hidden max-w-screen-lg overflow-y-auto">
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between w-full gap-2G">
         {/* Home Button - Always visible */}
         <Button
           onClick={() => {
-            window.location.href = "/curry-culum/";
+            window.location.href = "/";
           }}
           variant="outline"
           className="flex items-center space-x-2"

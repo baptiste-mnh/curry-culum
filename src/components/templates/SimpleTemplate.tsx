@@ -4,6 +4,7 @@ import {
   Certification,
   Education,
   Experience,
+  Interest,
   Language,
   Project,
   SectionType,
@@ -268,7 +269,10 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
     interestTags: {
       flexDirection: "row",
       flexWrap: "wrap",
-      gap: 5,
+      gap: 8,
+    },
+    interestItem: {
+      marginBottom: 8,
     },
     interestTag: {
       backgroundColor: colors.accent + "20",
@@ -277,6 +281,13 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
       borderRadius: 10,
       fontSize: 9,
       color: colors.text,
+      fontWeight: "bold",
+    },
+    interestDescription: {
+      fontSize: 8,
+      color: colors.lightText,
+      marginTop: 2,
+      paddingLeft: 4,
     },
   });
 
@@ -314,7 +325,7 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
   const languages = getSafeArrayData<Language>("languages");
   const projects = getSafeArrayData<Project>("projects");
   const certifications = getSafeArrayData<Certification>("certifications");
-  const interests = getSafeArrayData<string>("interests");
+  const interests = getSafeArrayData<Interest>("interests");
 
   // Render functions
   const renderPersonalInfo = () => (
@@ -647,9 +658,16 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
         </Text>
         <View style={styles.interestTags}>
           {interests.map((interest, idx) => (
-            <Text key={idx} style={styles.interestTag}>
-              {safeRender(interest)}
-            </Text>
+            <View key={interest.id || idx} style={styles.interestItem}>
+              <Text style={styles.interestTag}>
+                {safeRender(interest.name)}
+              </Text>
+              {interest.description && (
+                <Text style={styles.interestDescription}>
+                  {safeRender(interest.description)}
+                </Text>
+              )}
+            </View>
           ))}
         </View>
       </View>

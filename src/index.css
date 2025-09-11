@@ -117,3 +117,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  /* Glassmorphism surfaces */
+  [data-slot="card"],
+  .bg-card {
+    /* translucent background & blur */
+    @apply bg-card/70 backdrop-blur-lg backdrop-saturate-150 border border-border/30 shadow-lg;
+  }
+
+  /* Overlays & popovers */
+  .bg-popover {
+    @apply bg-popover/70 backdrop-blur-lg backdrop-saturate-150 border border-border/40 shadow-lg;
+  }
+
+  /* Sidebar (e.g. navigation) */
+  .bg-sidebar {
+    @apply bg-sidebar/80 backdrop-blur-lg backdrop-saturate-150 border border-border/25 shadow-lg;
+  }
+}

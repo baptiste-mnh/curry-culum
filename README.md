@@ -2,7 +2,7 @@
 
 Easily create professional resumes with a modern and customizable interface.
 
-Try it out at [https://baptiste-mnh.github.io/curry-culum/](https://baptiste-mnh.github.io/curry-culum/)
+Try it out at [https://curry-culum.manach.dev](https://curry-culum.manach.dev)
 
 ## Main Features
 
@@ -45,7 +45,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173/curry-culum/](http://localhost:5173/curry-culum/) in your browser.
+Open [http://localhost:5173/](http://localhost:5173/) in your browser.
 
 ## Customization
 

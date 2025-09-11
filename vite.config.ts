@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
   const isSingleFile = mode === "singlefile";
 
   return {
-    base: "/curry-culum/",
+    base: "/",
     plugins: [
       react(),
       ...(isSingleFile ? [viteSingleFile()] : []),

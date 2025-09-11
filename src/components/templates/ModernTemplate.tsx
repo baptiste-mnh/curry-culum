@@ -4,6 +4,7 @@ import {
   Certification,
   Education,
   Experience,
+  Interest,
   Language,
   Project,
   SectionType,
@@ -245,7 +246,10 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
     tagContainer: {
       flexDirection: "row",
       flexWrap: "wrap",
-      gap: 5,
+      gap: 8,
+    },
+    interestItem: {
+      marginBottom: 6,
     },
     tag: {
       backgroundColor: colors.primary,
@@ -255,6 +259,12 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       borderRadius: 8,
       fontSize: getFontSize("tags", "10px"),
       fontWeight: "bold",
+    },
+    interestDescription: {
+      fontSize: 7,
+      color: colors.lightText,
+      marginTop: 2,
+      paddingLeft: 2,
     },
     // Language styles (left column)
     languageItem: {
@@ -341,7 +351,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
   const languages = getSafeArrayData<Language>("languages");
   const projects = getSafeArrayData<Project>("projects");
   const certifications = getSafeArrayData<Certification>("certifications");
-  const interests = getSafeArrayData<string>("interests");
+  const interests = getSafeArrayData<Interest>("interests");
 
   // Render skill level dots
   const renderSkillLevel = () => {
@@ -499,9 +509,14 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
         </Text>
         <View style={styles.tagContainer}>
           {interests.slice(0, 8).map((interest, idx) => (
-            <Text key={idx} style={styles.tag}>
-              {safeRender(interest)}
-            </Text>
+            <View key={interest.id || idx} style={styles.interestItem}>
+              <Text style={styles.tag}>{safeRender(interest.name)}</Text>
+              {interest.description && (
+                <Text style={styles.interestDescription}>
+                  {safeRender(interest.description)}
+                </Text>
+              )}
+            </View>
           ))}
         </View>
       </View>

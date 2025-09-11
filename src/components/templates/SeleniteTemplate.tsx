@@ -7,6 +7,8 @@ import {
   SectionType,
   SkillCategory,
   ThemeConfig,
+  Project,
+  Interest,
 } from "@/types/cv";
 import {
   Document,
@@ -145,7 +147,7 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       backgroundColor: colors.primary,
     },
     sectionTitle: {
-      fontSize: getFontSize("header", "14px"),
+      fontSize: getFontSize("title", "14px"),
       fontWeight: "bold",
       color: colors.primary,
       paddingHorizontal: 20,
@@ -171,7 +173,7 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       flex: 1,
     },
     experienceTitle: {
-      fontSize: getFontSize("title", "14px"),
+      fontSize: getFontSize("header", "14px"),
       fontWeight: "bold",
       color: colors.text,
       marginBottom: 4,
@@ -199,6 +201,7 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       flexDirection: "row",
       marginBottom: 2,
       paddingLeft: 15,
+      alignItems: "flex-start",
     },
     bullet: {
       width: 5,
@@ -206,20 +209,24 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       borderRadius: 2.5,
       backgroundColor: colors.primary,
       marginRight: 10,
-      marginTop: 6,
+      marginTop: 2,
+      flexShrink: 0,
     },
     bulletText: {
       fontSize: getFontSize("text", "10px"),
       color: colors.text,
       flex: 1,
       lineHeight: 1.5,
+      textAlign: "left",
+      paddingLeft: 0,
+      marginTop: 0,
     },
     technologiesContainer: {
       marginLeft: 10,
       marginTop: 10,
     },
     technologiesTitle: {
-      fontSize: getFontSize("title", "10px"),
+      fontSize: getFontSize("header", "10px"),
       fontWeight: "bold",
       color: colors.text,
     },
@@ -251,7 +258,7 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       marginBottom: 5,
     },
     educationDegree: {
-      fontSize: getFontSize("text", "10px"),
+      fontSize: getFontSize("header", "10px"),
       fontWeight: "bold",
       color: colors.text,
       marginBottom: 4,
@@ -300,13 +307,12 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       fontSize: 8,
       fontWeight: "bold",
     },
-    // Language styles with flags
+    // Language styles with two-column grid layout
     languagesContainer: {
       flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "flex-start",
+      gap: 20,
     },
-    languagesList: {
+    languagesColumn: {
       flex: 1,
     },
     languageItem: {
@@ -338,6 +344,72 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       borderRadius: 3,
       backgroundColor: colors.primary,
       border: `1px solid ${colors.border}`,
+    },
+    // Project link styles with icons
+    projectLinksContainer: {
+      marginTop: 8,
+      flexDirection: "row",
+      gap: 12,
+      alignItems: "center",
+    },
+    projectLink: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 6,
+    },
+    linkIcon: {
+      width: 16,
+      height: 16,
+      backgroundColor: colors.primary,
+      borderRadius: 3,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    webIcon: {
+      width: 14,
+      height: 14,
+      backgroundColor: colors.primary,
+      borderRadius: 2,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    githubIcon: {
+      width: 14,
+      height: 14,
+      backgroundColor: colors.primary,
+      borderRadius: 2,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    linkText: {
+      fontSize: getFontSize("text", "10px"),
+      color: colors.primary,
+      textDecoration: "underline",
+    },
+    // Interests styles - 3 column layout
+    interestsRow: {
+      flexDirection: "row",
+      gap: 15,
+      marginBottom: 15,
+    },
+    interestCard: {
+      flex: 1,
+      backgroundColor: colors.lightGray,
+      padding: 12,
+      borderRadius: 8,
+      border: `1px solid ${colors.border}`,
+      minHeight: 60,
+    },
+    interestTitle: {
+      fontSize: getFontSize("header", "12px"),
+      fontWeight: "bold",
+      color: colors.primary,
+      marginBottom: 4,
+    },
+    interestDescription: {
+      fontSize: getFontSize("text", "9px"),
+      color: colors.text,
+      lineHeight: 1.4,
     },
   });
 
@@ -371,6 +443,8 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
   const educationList = getSafeArrayData<Education>("education");
   const skillCategories = getSafeArrayData<SkillCategory>("skillCategories");
   const languages = getSafeArrayData<Language>("languages");
+  const projects = getSafeArrayData<Project>("projects");
+  const interests = getSafeArrayData<Interest>("interests");
 
   // Split description into bullet points
   const formatDescription = (description: string) => {
@@ -384,6 +458,24 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       <View style={styles.sideBar} />
       <Text style={styles.sectionTitle}>{title}</Text>
       <View style={styles.sideBar} />
+    </View>
+  );
+
+  // Render web icon
+  const renderWebIcon = () => (
+    <View style={styles.webIcon}>
+      <Text style={{ color: colors.white, fontSize: 8, fontWeight: "bold" }}>
+        W
+      </Text>
+    </View>
+  );
+
+  // Render GitHub icon
+  const renderGitHubIcon = () => (
+    <View style={styles.githubIcon}>
+      <Text style={{ color: colors.white, fontSize: 8, fontWeight: "bold" }}>
+        Gh
+      </Text>
     </View>
   );
 
@@ -514,6 +606,73 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
     );
   };
 
+  const renderProjects = () => {
+    if (!isVisible() || projects.length === 0) return null;
+
+    return (
+      <View
+        style={styles.section}
+        break={cvData.sectionStartPage["projects"] || false}
+      >
+        {renderSectionTitle(getTranslatedTitle("projects"))}
+        {projects.map((p, index) => (
+          <View
+            key={p?.id || index}
+            style={styles.experienceItem}
+            break={
+              index === 0 ? false : cvData.itemPageBreaks[p?.id || ""] || false
+            }
+            wrap={false}
+          >
+            <View style={styles.experienceHeader}>
+              <View style={styles.experienceLeft}>
+                <Text style={styles.experienceTitle}>
+                  {safeRender(p?.title)}
+                </Text>
+              </View>
+            </View>
+
+            {p?.description && (
+              <Text style={styles.experienceDescription}>
+                {safeRender(p.description)}
+              </Text>
+            )}
+
+            {p?.technologies && p.technologies.length > 0 && (
+              <View style={styles.technologiesContainer}>
+                <Text style={styles.technologiesTitle}>Technologies</Text>
+                <View style={styles.technologiesList}>
+                  {p.technologies.map((t, i) => (
+                    <Text key={i} style={styles.technologyTag}>
+                      {safeRender(t)}
+                    </Text>
+                  ))}
+                </View>
+              </View>
+            )}
+
+            {(p?.url || p?.github) && (
+              <View style={styles.projectLinksContainer}>
+                {p?.url && (
+                  <View style={styles.projectLink}>
+                    {renderWebIcon()}
+                    <Text style={styles.linkText}>{safeRender(p.url)}</Text>
+                  </View>
+                )}
+                {p?.github && (
+                  <View style={styles.projectLink}>
+                    {renderGitHubIcon()}
+                    <Text style={styles.linkText}>{safeRender(p.github)}</Text>
+                  </View>
+                )}
+              </View>
+            )}
+          </View>
+        ))}
+      </View>
+    );
+  };
+
   const renderEducation = () => {
     if (!isVisible() || educationList.length === 0) return null;
 
@@ -628,6 +787,11 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
   const renderLanguages = () => {
     if (!isVisible() || languages.length === 0) return null;
 
+    // Split languages into two columns
+    const midpoint = Math.ceil(languages.length / 2);
+    const leftLanguages = languages.slice(0, midpoint);
+    const rightLanguages = languages.slice(midpoint);
+
     return (
       <View
         style={styles.section}
@@ -635,8 +799,29 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       >
         {renderSectionTitle(getTranslatedTitle("languages"))}
         <View style={styles.languagesContainer}>
-          <View style={styles.languagesList}>
-            {languages.map((lang, index) => (
+          <View style={styles.languagesColumn}>
+            {leftLanguages.map((lang, index) => (
+              <View
+                key={lang?.id || index}
+                style={styles.languageItem}
+                break={
+                  index === 0
+                    ? false
+                    : cvData.itemPageBreaks[lang?.id || ""] || false
+                }
+                wrap={false}
+              >
+                <Text style={styles.languageName}>
+                  {safeRender(lang?.name)}
+                </Text>
+                <Text style={styles.languageLevel}>
+                  {safeRender(lang?.level)}
+                </Text>
+              </View>
+            ))}
+          </View>
+          <View style={styles.languagesColumn}>
+            {rightLanguages.map((lang, index) => (
               <View
                 key={lang?.id || index}
                 style={styles.languageItem}
@@ -661,6 +846,46 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
     );
   };
 
+  const renderInterests = () => {
+    if (!isVisible() || interests.length === 0) return null;
+
+    // Split interests into rows of 3
+    const interestsRows = [];
+    for (let i = 0; i < interests.length; i += 3) {
+      interestsRows.push(interests.slice(i, i + 3));
+    }
+
+    return (
+      <View
+        style={styles.section}
+        break={cvData.sectionStartPage["interests"] || false}
+      >
+        {renderSectionTitle(getTranslatedTitle("interests"))}
+        {interestsRows.map((row, rowIndex) => (
+          <View key={rowIndex} style={styles.interestsRow}>
+            {row.map((interest, index) => (
+              <View key={interest?.id || index} style={styles.interestCard}>
+                <Text style={styles.interestTitle}>
+                  {safeRender(interest?.name)}
+                </Text>
+                {interest?.description && (
+                  <Text style={styles.interestDescription}>
+                    {safeRender(interest.description)}
+                  </Text>
+                )}
+              </View>
+            ))}
+            {/* Fill empty slots in the last row */}
+            {row.length < 3 &&
+              Array.from({ length: 3 - row.length }).map((_, emptyIndex) => (
+                <View key={`empty-${emptyIndex}`} style={styles.interestCard} />
+              ))}
+          </View>
+        ))}
+      </View>
+    );
+  };
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -668,10 +893,12 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
 
         <View style={styles.content}>
           {renderSummary()}
-          {renderExperiences()}
           {renderEducation()}
+          {renderExperiences()}
+          {renderProjects()}
           {renderSkills()}
           {renderLanguages()}
+          {renderInterests()}
         </View>
       </Page>
     </Document>
