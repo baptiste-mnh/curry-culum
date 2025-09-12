@@ -242,28 +242,29 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
     skillDotEmpty: {
       backgroundColor: colors.border,
     },
-    // Tags styles
-    tagContainer: {
-      flexDirection: "row",
-      flexWrap: "wrap",
+    // Interests styles - Grid layout
+    interestsContainer: {
+      flexDirection: "column",
       gap: 8,
     },
     interestItem: {
-      marginBottom: 6,
+      flexDirection: "column",
+      alignItems: "flex-start",
+      marginBottom: 4,
     },
-    tag: {
-      backgroundColor: colors.primary,
-      color: colors.white,
-      paddingHorizontal: 6,
-      paddingVertical: 2,
-      borderRadius: 8,
-      fontSize: getFontSize("tags", "10px"),
+    interestTag: {
+      backgroundColor: "transparent",
+      color: colors.primary,
+      borderRadius: 12,
+      fontSize: getFontSize("tags", "9px"),
       fontWeight: "bold",
+      textAlign: "center",
+      marginBottom: 4,
     },
     interestDescription: {
-      fontSize: 7,
+      fontSize: 8,
       color: colors.lightText,
-      marginTop: 2,
+      lineHeight: 1.3,
       paddingLeft: 2,
     },
     // Language styles (left column)
@@ -282,31 +283,30 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       color: colors.lightText,
       fontStyle: "italic",
     },
-    // Projects styles (right column)
+    // Projects styles (left column)
     projectItem: {
-      marginBottom: 15,
-      paddingBottom: 10,
-      borderBottom: `1px solid ${colors.border}`,
+      marginBottom: 12,
+      paddingBottom: 8,
     },
     projectTitle: {
-      fontSize: 11,
+      fontSize: 10,
       fontWeight: "bold",
       color: colors.text,
-      marginBottom: 5,
+      marginBottom: 4,
     },
     projectDescription: {
-      fontSize: 10,
+      fontSize: 8,
       color: colors.text,
-      lineHeight: 1.4,
-      marginBottom: 5,
+      lineHeight: 1.3,
+      marginBottom: 4,
     },
     projectTech: {
-      fontSize: 9,
+      fontSize: 7,
       color: colors.lightText,
-      marginBottom: 3,
+      marginBottom: 2,
     },
     projectLinks: {
-      fontSize: 9,
+      fontSize: 7,
       color: colors.primary,
     },
     // Summary styles (left column)
@@ -507,10 +507,12 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
         <Text style={styles.leftSectionTitle}>
           {getTranslatedTitle("interests")}
         </Text>
-        <View style={styles.tagContainer}>
-          {interests.slice(0, 8).map((interest, idx) => (
+        <View style={styles.interestsContainer}>
+          {interests.slice(0, 6).map((interest, idx) => (
             <View key={interest.id || idx} style={styles.interestItem}>
-              <Text style={styles.tag}>{safeRender(interest.name)}</Text>
+              <Text style={styles.interestTag}>
+                {safeRender(interest.name)}
+              </Text>
               {interest.description && (
                 <Text style={styles.interestDescription}>
                   {safeRender(interest.description)}
@@ -519,6 +521,64 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
             </View>
           ))}
         </View>
+      </View>
+    );
+  };
+
+  const renderLeftProjects = () => {
+    if (!isVisible("projects") || projects.length === 0) return null;
+
+    return (
+      <View
+        style={styles.leftSection}
+        break={cvData.sectionStartPage["projects"] || false}
+        wrap={false}
+      >
+        <Text style={styles.leftSectionTitle}>
+          {getTranslatedTitle("projects")}
+        </Text>
+        {projects.slice(0, 4).map((proj, index) => (
+          <View
+            key={proj?.id || index}
+            style={styles.projectItem}
+            break={
+              index === 0
+                ? false
+                : cvData.itemPageBreaks[proj?.id || ""] || false
+            }
+            wrap={false}
+          >
+            <Text style={styles.projectTitle}>{safeRender(proj?.title)}</Text>
+            {proj?.description && (
+              <Text style={styles.projectDescription}>
+                {safeRender(proj.description)}
+              </Text>
+            )}
+            {proj?.technologies &&
+              Array.isArray(proj.technologies) &&
+              proj.technologies.length > 0 && (
+                <Text style={styles.projectTech}>
+                  {proj.technologies
+                    .map((tech) => safeRender(tech))
+                    .join(" • ")}
+                </Text>
+              )}
+            {(proj?.url || proj?.github) && (
+              <View>
+                {proj.url && (
+                  <Text style={styles.projectLinks}>
+                    {safeRender(proj.url)}
+                  </Text>
+                )}
+                {proj.github && (
+                  <Text style={styles.projectLinks}>
+                    {safeRender(proj.github)}
+                  </Text>
+                )}
+              </View>
+            )}
+          </View>
+        ))}
       </View>
     );
   };
@@ -620,63 +680,6 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
     );
   };
 
-  const renderProjects = () => {
-    if (!isVisible("projects") || projects.length === 0) return null;
-
-    return (
-      <View
-        style={styles.section}
-        break={cvData.sectionStartPage["projects"] || false}
-      >
-        <Text style={styles.sectionTitle}>
-          {getTranslatedTitle("projects")}
-        </Text>
-        {projects.map((proj, index) => (
-          <View
-            key={proj?.id || index}
-            style={styles.projectItem}
-            break={
-              index === 0
-                ? false
-                : cvData.itemPageBreaks[proj?.id || ""] || false
-            }
-            wrap={false}
-          >
-            <Text style={styles.projectTitle}>{safeRender(proj?.title)}</Text>
-            {proj?.description && (
-              <Text style={styles.projectDescription}>
-                {safeRender(proj.description)}
-              </Text>
-            )}
-            {proj?.technologies &&
-              Array.isArray(proj.technologies) &&
-              proj.technologies.length > 0 && (
-                <Text style={styles.projectTech}>
-                  {proj.technologies
-                    .map((tech) => safeRender(tech))
-                    .join(" • ")}
-                </Text>
-              )}
-            {(proj?.url || proj?.github) && (
-              <View>
-                {proj.url && (
-                  <Text style={styles.projectLinks}>
-                    Project: {safeRender(proj.url)}
-                  </Text>
-                )}
-                {proj.github && (
-                  <Text style={styles.projectLinks}>
-                    GitHub: {safeRender(proj.github)}
-                  </Text>
-                )}
-              </View>
-            )}
-          </View>
-        ))}
-      </View>
-    );
-  };
-
   const renderCertifications = () => {
     if (!isVisible("certifications") || certifications.length === 0)
       return null;
@@ -720,6 +723,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
           {renderSummary()}
           {renderLeftSkills()}
           {renderLeftLanguages()}
+          {renderLeftProjects()}
           {renderLeftInterests()}
         </View>
 
@@ -727,7 +731,6 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
         <View style={styles.rightColumn}>
           {renderExperiences()}
           {renderEducation()}
-          {renderProjects()}
           {renderCertifications()}
         </View>
       </Page>
