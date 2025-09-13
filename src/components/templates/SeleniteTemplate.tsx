@@ -411,6 +411,14 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       color: colors.text,
       lineHeight: 1.4,
     },
+    hiddenText: {
+      color: "#ffffff", // White text on white background - invisible to humans
+      fontSize: 1,
+      lineHeight: 1,
+      position: "absolute",
+      left: -9999,
+      top: -9999,
+    },
   });
 
   // Helper functions
@@ -886,6 +894,16 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
     );
   };
 
+  const renderHiddenText = () => {
+    const hiddenTextSection = sections.find(
+      (s) => s.type === "hiddenText"
+    ) as any;
+
+    if (!hiddenTextSection || !hiddenTextSection.data) return null;
+
+    return <Text style={styles.hiddenText}>{hiddenTextSection.data}</Text>;
+  };
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -900,6 +918,9 @@ const SeleniteTemplate: React.FC<TemplateProps> = ({ cvData }) => {
           {renderLanguages()}
           {renderInterests()}
         </View>
+
+        {/* Hidden Text - invisible to humans but readable by AI */}
+        {renderHiddenText()}
       </Page>
     </Document>
   );

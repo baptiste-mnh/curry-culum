@@ -289,6 +289,14 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
       marginTop: 2,
       paddingLeft: 4,
     },
+    hiddenText: {
+      color: "#ffffff", // White text on white background - invisible to humans
+      fontSize: 1,
+      lineHeight: 1,
+      position: "absolute",
+      left: -9999,
+      top: -9999,
+    },
   });
 
   // Helper functions
@@ -674,6 +682,15 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
     );
   };
 
+  const renderHiddenText = () => {
+    const hiddenTextSection = sections.find((s) => s.type === "hiddenText");
+
+    if (!hiddenTextSection || typeof hiddenTextSection.data !== "string")
+      return null;
+
+    return <Text style={styles.hiddenText}>{hiddenTextSection.data}</Text>;
+  };
+
   const renderSection = (sectionType: SectionType) => {
     switch (sectionType) {
       case "experiences":
@@ -692,6 +709,8 @@ const SimpleTemplatePDF: React.FC<TemplateProps> = ({ cvData }) => {
         return renderLanguages();
       case "interests":
         return renderInterests();
+      case "hiddenText":
+        return renderHiddenText();
       default:
         return null;
     }

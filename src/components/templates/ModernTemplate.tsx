@@ -316,6 +316,11 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       lineHeight: 1.4,
       textAlign: "justify",
     },
+    hiddenText: {
+      color: "#ffffff",
+      fontSize: 2,
+      lineHeight: 1,
+    },
   });
 
   // Helper functions
@@ -713,6 +718,15 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
     );
   };
 
+  const renderHiddenText = () => {
+    const hiddenTextSection = sections.find((s) => s.type === "hiddenText");
+
+    if (!hiddenTextSection || typeof hiddenTextSection.data !== "string")
+      return null;
+
+    return <Text style={styles.hiddenText}>{hiddenTextSection.data}</Text>;
+  };
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -732,6 +746,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
           {renderExperiences()}
           {renderEducation()}
           {renderCertifications()}
+          {renderHiddenText()}
         </View>
       </Page>
     </Document>

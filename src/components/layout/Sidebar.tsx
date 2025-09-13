@@ -1,6 +1,7 @@
 import CertificationsForm from "@/components/forms/CertificationsForm";
 import EducationForm from "@/components/forms/EducationForm";
 import ExperienceForm from "@/components/forms/ExperienceForm";
+import { HiddenTextForm } from "@/components/forms/HiddenTextForm";
 import InterestsForm from "@/components/forms/InterestsForm";
 import LanguagesForm from "@/components/forms/LanguagesForm";
 import { PersonalInfoForm } from "@/components/forms/PersonalInfoForm";
@@ -26,7 +27,7 @@ import { SectionType } from "@/types/cv";
 import React, { useState } from "react";
 
 const Sidebar: React.FC = () => {
-  const { cvData, updateSectionStartPage, resetPageBreaks } =
+  const { cvData, updateSectionStartPage, updateSectionData, resetPageBreaks } =
     useCVDataContext();
   const { t } = useTranslation();
   const [openSections, setOpenSections] = useState<string[]>(["personalInfo"]);
@@ -55,6 +56,17 @@ const Sidebar: React.FC = () => {
         return <CertificationsForm />;
       case "interests":
         return <InterestsForm />;
+      case "hiddenText":
+        return (
+          <HiddenTextForm
+            section={
+              cvData.sections.find((s) => s.type === "hiddenText") as any
+            }
+            onUpdate={(section) => {
+              updateSectionData("hiddenText", section.data);
+            }}
+          />
+        );
       default:
         return null;
     }

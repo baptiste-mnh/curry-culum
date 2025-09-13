@@ -101,6 +101,17 @@ export const SECTIONS_CONFIG: SectionConfig[] = [
       en: "Certifications",
     },
   },
+  {
+    id: "hiddenText",
+    name: "Hidden Text",
+    icon: "EyeOff",
+    defaultStartPage: false,
+    order: 9,
+    titleKey: {
+      fr: "Texte caché",
+      en: "Hidden Text",
+    },
+  },
 ];
 
 export const DEFAULT_THEME: ThemeConfig = {
@@ -129,6 +140,7 @@ export const DEFAULT_SECTION_ORDER: SectionType[] = [
   "projects",
   "interests",
   "certifications",
+  "hiddenText",
 ];
 
 export const TRANSLATIONS: Translation = {
@@ -188,6 +200,13 @@ export const TRANSLATIONS: Translation = {
   "certification.issuer": { fr: "Organisme", en: "Issuer" },
   "certification.date": { fr: "Date", en: "Date" },
   "certification.url": { fr: "URL", en: "URL" },
+
+  // Hidden Text
+  "hiddenText.text": { fr: "Texte caché", en: "Hidden Text" },
+  "hiddenText.placeholder": {
+    fr: "Entrez le texte qui sera invisible mais lisible par les outils d'IA...",
+    en: "Enter text that will be invisible but readable by AI tools...",
+  },
 
   // Messages
   "message.saved": { fr: "Sauvegardé avec succès", en: "Saved successfully" },

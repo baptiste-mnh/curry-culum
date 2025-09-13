@@ -101,7 +101,8 @@ export type SectionType =
   | "languages"
   | "projects"
   | "interests"
-  | "certifications";
+  | "certifications"
+  | "hiddenText";
 
 export interface CVData {
   template: string;
@@ -111,7 +112,7 @@ export interface CVData {
   sections: CVSection[];
   sectionStartPage: Record<SectionType, boolean>;
   sectionOrder: SectionType[];
-  itemPageBreaks: Record<string, boolean>; // Track page breaks by item ID
+  itemPageBreaks: Record<string, boolean>;
 }
 
 // Specific section data types
@@ -153,4 +154,9 @@ export interface InterestsSection extends CVSection {
 export interface CertificationsSection extends CVSection {
   type: "certifications";
   data: Certification[];
+}
+
+export interface HiddenTextSection extends CVSection {
+  type: "hiddenText";
+  data: string;
 }

@@ -26,7 +26,7 @@ export const createEmptySection = (type: SectionType): CVSection => {
     id: generateId(),
     type,
     title: config?.titleKey.en || type,
-    data: [],
+    data: type === "hiddenText" ? "" : [],
     isAtPageStart: config?.defaultStartPage ?? false,
     order: config?.order || 0,
   };
