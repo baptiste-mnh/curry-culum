@@ -226,22 +226,6 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
       color: colors.text,
       flex: 1,
     },
-    skillLevel: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    skillDot: {
-      width: 6,
-      height: 6,
-      borderRadius: 3,
-      marginRight: 2,
-    },
-    skillDotFilled: {
-      backgroundColor: colors.primary,
-    },
-    skillDotEmpty: {
-      backgroundColor: colors.border,
-    },
     // Interests styles - Grid layout
     interestsContainer: {
       flexDirection: "column",
@@ -358,27 +342,6 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
   const certifications = getSafeArrayData<Certification>("certifications");
   const interests = getSafeArrayData<Interest>("interests");
 
-  // Render skill level dots
-  const renderSkillLevel = () => {
-    // Simple logic: 4 dots for demonstration
-    const totalDots = 4;
-    const filledDots = Math.floor(Math.random() * 4) + 1; // Random for demo
-
-    return (
-      <View style={styles.skillLevel}>
-        {Array.from({ length: totalDots }).map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.skillDot,
-              index < filledDots ? styles.skillDotFilled : styles.skillDotEmpty,
-            ]}
-          />
-        ))}
-      </View>
-    );
-  };
-
   // Left column render functions
   const renderProfile = () => (
     <View style={styles.profileSection}>
@@ -469,7 +432,6 @@ const ModernTemplate: React.FC<TemplateProps> = ({ cvData }) => {
               cat.skills.slice(0, 5).map((skill, idx) => (
                 <View key={idx} style={styles.skillItem} minPresenceAhead={30}>
                   <Text style={styles.skillName}>{safeRender(skill)}</Text>
-                  {renderSkillLevel()}
                 </View>
               ))}
           </View>
